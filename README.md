@@ -1,7 +1,17 @@
 # teamwork-api
+
 This is intended as a very simple wrapper for the [Teamwork API](http://developer.teamwork.com/), with minimal dependencies.
 
 The wrapper provides a set of functions, one per API endpoint, and simply returns whatever data is returned by the API call. If you're looking for a more fleshed-out wrapper with fully-realised objects for the different resource types then you might be better off trying [this project](https://github.com/bvalosek/teamworkpm-js) by Brandon Valosek (although not all resource types are supported).
+
+Disclaimer
+----------
+Please note that this is very early days for this project, so:
+ - Not all endpoints are implemented (there are over 170 of them...give me a break!)
+ - Error handling is not properly tested
+ - Actually, very little is properly tested
+ - Yes, there will eventually be a minified version
+ - Yes, there will be probably be an option to install via (at least) bower at some point
 
 Usage
 =====
