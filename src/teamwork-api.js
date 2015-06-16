@@ -376,13 +376,39 @@ Creating Categories
 http://developer.teamwork.com/messagecategories#creating_categori
 POST /projects/{project_id}/messageCategories.json
 
-Retrieve a Single Category
-http://developer.teamwork.com/messagecategories#retrieve_a_single
-GET /messageCategories/{id}.json
+	/**
+	 * Retrieve a Single Message Category
+	 * http://developer.teamwork.com/messagecategories#retrieve_a_single
+	 *
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetMessageCategory = function( category_id, options ){
+		return Get(
+			BuildPath( 'messageCategories/{id}', {id:category_id} ),
+			options
+		);
+	};
 
-Retrieving all of a Projects Categories
-http://developer.teamwork.com/messagecategories#retrieving_all_of
-GET /projects/{project_id}/messageCategories.json
+	/**
+	 * Retrieving all of a Projects Message Categories
+	 * http://developer.teamwork.com/messagecategories#retrieving_all_of
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectMessageCategories = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/messageCategories', {project_id:project_id} ),
+			options
+		);
+	};
+
+/*
 
 Updating a Category
 http://developer.teamwork.com/messagecategories#updating_a_catego
@@ -395,18 +421,45 @@ DELETE /messageCategories/{id}.json
 
 /**
 - File Categories 
+*/
 
+	/**
+	 * Retrieve a Single File Category
+	 * http://developer.teamwork.com/filecategories#retrieve_a_single
+	 *
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetFileCategory = function( category_id, options ){
+		return Get(
+			BuildPath( 'fileCategories/{id}', {id:category_id} ),
+			options
+		);
+	};
+
+	/**
+	 * Retrieving all of a Projects File Categories
+	 * http://developer.teamwork.com/filecategories#retrieving_all_of
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectFileCategories = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/fileCategories.json', {project_id:project_id} ),
+			options
+		);
+	};
+
+
+/**
 Creating Categories
 http://developer.teamwork.com/filecategories#creating_categori
 POST /projects/{project_id}/fileCategories.json
-
-Retrieve a Single Category
-http://developer.teamwork.com/filecategories#retrieve_a_single
-GET /fileCategories/{id}.json
-
-Retrieving all of a Projects Categories
-http://developer.teamwork.com/filecategories#retrieving_all_of
-GET /projects/{project_id}/fileCategories.json
 
 Updating a Category
 http://developer.teamwork.com/filecategories#updating_a_catego
@@ -424,14 +477,40 @@ Creating Categories
 http://developer.teamwork.com/notebookcategories#creating_categori
 POST /projects/{project_id}/notebookCategories.json
 
-Retrieve a Single Category
-http://developer.teamwork.com/notebookcategories#retrieve_a_single
-GET /notebookCategories/{id}.json
+*/
 
-Retrieving all of a Projects Categories
-http://developer.teamwork.com/notebookcategories#retrieving_all_of
-GET /projects/{project_id}/notebookCategories.json
+	/**
+	 * Retrieve a Single Notebook Category
+	 * http://developer.teamwork.com/notebookcategories#retrieve_a_single
+	 *
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetNotebookCategory = function( category_id, options ){
+		return Get(
+			BuildPath( 'notebookCategories/{id}', {id:category_id} ),
+			options
+		);
+	};
 
+	/**
+	 * Retrieving all of a Projects Notebook Categories
+	 * http://developer.teamwork.com/notebookcategories#retrieving_all_of
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectFileCategories = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/notebookCategories', {project_id:project_id} ),
+			options
+		);
+	};
+/**
 Updating a Category
 http://developer.teamwork.com/notebookcategories#updating_a_catego
 PUT /notebookCategories/{id}.json
@@ -447,14 +526,41 @@ DELETE /notebookCategories/{id}.json
 Creating categories
 http://developer.teamwork.com/linkcategories#__creating_categor
 POST /projects/#{project_id}/linkCategories.json
+*/
 
-Retrieve a single category
-http://developer.teamwork.com/linkcategories#__retrieve_a_singl
-GET /linkCategories/#{id}.json
+	/**
+	 * Retrieve a single link category
+	 * http://developer.teamwork.com/linkcategories#__retrieve_a_singl
+	 *
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetLinkCategory = function( category_id, options ){
+		return Get(
+			BuildPath( 'linkCategories/{id}', {id:category_id} ),
+			options
+		);
+	};
 
-Retrieving all of a projects link categories
-http://developer.teamwork.com/linkcategories#__retrieving_all_o
-GET /projects/#{project_id}/linkCategories.json
+	/**
+	 * Retrieving all of a projects link categories
+	 * http://developer.teamwork.com/linkcategories#__retrieving_all_o
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectLinkCategories = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/linkCategories', {project_id:project_id} ),
+			options
+		);
+	};
+	
+/**
 
 Updating a category
 http://developer.teamwork.com/linkcategories#__updating_a_categ
@@ -471,14 +577,40 @@ DELETE /linkCategories/#{id}.json
 Creating Project Categories
 http://developer.teamwork.com/projectcategories#creating_project_
 POST /projectcategories.json
+*/
 
-Retrieve a single Project Category
-http://developer.teamwork.com/projectcategories#retrieve_a_single
-GET /projectCategories/{id}.json
+	/**
+	 * Retrieve a single Project Category
+	 * http://developer.teamwork.com/projectcategories#retrieve_a_single
+	 *
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectCategory = function( category_id, options ){
+		return Get(
+			BuildPath( 'projectCategories/{id}', {id:category_id} ),
+			options
+		);
+	};
 
-Retrieve all Project Categories
-http://developer.teamwork.com/projectcategories#retrieve_all_proj
-GET /projectCategories.json
+	/**
+	 * Retrieve all Project Categories
+	 * http://developer.teamwork.com/projectcategories#retrieve_all_proj
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectCategories = function( project_id, options ){
+		return Get(
+			BuildPath( 'projectCategories', {project_id:project_id} ),
+			options
+		);
+	};
+/**
 
 Updating a Project Category
 http://developer.teamwork.com/projectcategories#updating_a_projec
