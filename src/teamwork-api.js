@@ -621,17 +621,45 @@ http://developer.teamwork.com/projectcategories#destroying_a_proj
 DELETE /projectCategories/{id}.json
 **/
 
+/************
+ * Comments *
+ ************/
+
+	/**
+	 * Retreiving Recent Comments
+	 * http://developer.teamwork.com/comments#retreiving_recent
+	 *
+	 * @param		string		resource_type		links, milestones, files, notebooks or tasks
+	 * @param		int			resource_id
+	 * @param		object		options				Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetRecentComments = function( resource_type, resource_id, options ){
+		return Get(
+			BuildPath( '{resource}/{resource_id}/comments', {resource:resource_type, resource_id:resource_id} ),
+			options
+		);
+	};
+
+	/**
+	 * Retrieving a Specific Comment
+	 * http://developer.teamwork.com/comments#retrieving_a_spec
+	 *
+	 * @param		int			comment_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetComment = function( comment_id, options ){
+		return Get(
+			BuildPath( 'comments/{comment_id}', {comment_id:comment_id} ),
+			options
+		);
+	};
+
 /**
-Comments
-========
 
-Retreiving Recent Comments
-http://developer.teamwork.com/comments#retreiving_recent
-GET /{resource}/{resource_id}/comments.json
-
-Retrieving a Specific Comment
-http://developer.teamwork.com/comments#retrieving_a_spec
-GET /comments/{comment_id}.json
 
 Creating a Comment
 http://developer.teamwork.com/comments#creating_a_commen
@@ -650,10 +678,11 @@ http://developer.teamwork.com/comments#mark_a_comment_as
 PUT /comments/{id}/markread.json
 **/
 
-/**
-Companies
-=========
+/*************
+ * Companies *
+ *************/
 
+ /*
 Create Company
 http://developer.teamwork.com/companies#create_company
 POST /companies.json
@@ -665,31 +694,91 @@ PUT /companies/{company_id}.json
 Delete Company
 http://developer.teamwork.com/companies#delete_company
 DELETE /companies/{id}.json
+*/
 
-Retrieve a Single Company
-http://developer.teamwork.com/companies#retrieve_a_single
-GET /companies/{company_id}.json
+	/**
+	 * Retrieve a Single Company
+	 * http://developer.teamwork.com/companies#retrieve_a_single
+	 *
+	 * @param		int			company_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCompany = function( company_id, options ){
+		return Get(
+			BuildPath( 'companies/{company_id}', {company_id:company_id} ),
+			options
+		);
+	};
+	
+	/**
+	 * Retrieve Companies
+	 * http://developer.teamwork.com/companies#retrieve_companie
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCompanies = function( options ){
+		return Get(
+			'companies',
+			options
+		);
+	};
 
-Retrieve Companies
-http://developer.teamwork.com/companies#retrieve_companie
-GET /companies.json
+	/**
+	 * Retrieving Companies within a Project
+	 * http://developer.teamwork.com/companies#retrieving_compan
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectCompanies = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/companies', {project_id:project_id} ),
+			options
+		);
+	};
 
-Retrieving Companies within a Project
-http://developer.teamwork.com/companies#retrieving_compan
-GET /projects/{project_id}/companies.json
-**/
+/*********
+ * Files *
+ *********/
 
+	/**
+	 * Get a Single File
+	 * http://developer.teamwork.com/files#get_a_single_file
+	 *
+	 * @param		int			file_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetFile = function( file_id, options ){
+		return Get(
+			BuildPath( 'files/{file_id}', {file_id:company_id} ),
+			options
+		);
+	};
+	
+	/**
+	 * List Files on a Project
+	 * http://developer.teamwork.com/files#list_files_on_a_p
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectFiles = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/files', {project_id:project_id} ),
+			options
+		);
+	};
 /**
-Files
-=====
-
-List Files on a Project
-http://developer.teamwork.com/files#list_files_on_a_p
-GET /projects/{project_id}/files.json
-
-Get a Single File
-http://developer.teamwork.com/files#get_a_single_file
-GET /files/{file_id}.json
 
 Add a File to a Project
 http://developer.teamwork.com/files#add_a_file_to_a_p
@@ -704,17 +793,59 @@ http://developer.teamwork.com/files#delete_a_file_fro
 DELETE /files/{file_id}.json
 **/
 
-/**
-Calendar Events
-===============
+/*******************
+ * Calendar Events *
+ *******************/
 
-Get Events
-http://developer.teamwork.com/events#get_events
-GET /calendarevents.json
+	/**
+	 * Get Events
+	 * http://developer.teamwork.com/events#get_events
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCalendarEvents = function( options ){
+		return Get(
+			'calendarevents',
+			options
+		);
+	};
+	
+	/**
+	 * Get an Event
+	 * http://developer.teamwork.com/events#get_an_event
+	 *
+	 * @param		int			event_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCalendarEvent = function( event_id, options ){
+		return Get(
+			BuildPath( 'calendarevents/{id}', {id:event_id} ),
+			options
+		);
+	};
+	
+	/**
+	 * Get event types
+	 * http://developer.teamwork.com/events#get_event_types
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCalendarEventTypes = function( options ){
+		return Get(
+			'calendareventtypes',
+			options
+		);
+	};
 
-Get an Event
-http://developer.teamwork.com/events#get_an_event
-GET /calendarevents/{id}.json
+/*
+
+
 
 Create event
 http://developer.teamwork.com/events#create_event
@@ -728,42 +859,106 @@ Delete event
 http://developer.teamwork.com/events#delete_event
 DELETE /calendarevents/{id}.json
 
-Get event types
-http://developer.teamwork.com/events#get_event_types
-GET /calendareventtypes.json
+
+
 **/
 
-/**
-Messages
-========
+/************
+ * Messages *
+ ************/
+
+	/**
+	 * Retrieve a Single Message
+	 * http://developer.teamwork.com/messages#retrieve_a_single
+	 *
+	 * @param		int			message_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetMessage = function( message_id, options ){
+		return Get(
+			BuildPath( 'posts/{id}', {id:event_id} ),
+			options
+		);
+	};
+	
+	/**
+	 * Retrieve Latest Messages
+	 * http://developer.teamwork.com/messages#retrieve_latest_m
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectMessages = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/posts', {project_id:project_id} ),
+			options
+		);
+	};
+
+	/**
+	 * Retrieve Messages by Category
+	 * http://developer.teamwork.com/messages#retrieve_messages
+	 *
+	 * @param		int			project_id
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectMessagesByCategory = function( project_id, category_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/cat/{category_id}/posts', {project_id:project_id,category_id:category_id} ),
+			options
+		);
+	};
+
+	/**
+	 * Get archived messages
+	 * http://developer.teamwork.com/messages#get_archived_mess
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectArchivedMessages = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/posts/archive', {project_id:project_id} ),
+			options
+		);
+	};
+
+	/**
+	 * Get archived messages by category
+	 * http://developer.teamwork.com/messages#get_archived_mess
+	 *
+	 * @param		int			project_id
+	 * @param		int			category_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectArchivedMessagesByCategory = function( project_id, category_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/cat/{category_id}/posts/archive', {project_id:project_id,category_id:category_id} ),
+			options
+		);
+	};
+
+
+/*
 
 Create a message
 http://developer.teamwork.com/messages#create_a_message
 POST /projects/{project_id}/posts.json
 
-Retrieve a Single Message
-http://developer.teamwork.com/messages#retrieve_a_single
-GET /posts/{id}.json
-
-Retrieve Latest Messages
-http://developer.teamwork.com/messages#retrieve_latest_m
-GET /projects/{project_id}/posts.json
-
-Retrieve Messages by Category
-http://developer.teamwork.com/messages#retrieve_messages
-GET /projects/{project_id}/cat/{category_id}/posts.json
-
 Update message
 http://developer.teamwork.com/messages#update_message
 PUT /posts/{id}.json
-
-Get archived messages
-http://developer.teamwork.com/messages#get_archived_mess
-GET /projects/{project_id}/posts/archive.json
-
-Get archived messages by category
-http://developer.teamwork.com/messages#get_archived_mess
-GET /projects/{project_id}/cat/{category_id}/posts/archive.json
 
 Archive a message
 http://developer.teamwork.com/messages#archive_a_message
@@ -807,17 +1002,56 @@ DELETE /messageReplies/{id}.json
 Milestones
 ==========
 
-List All Milestones
-http://developer.teamwork.com/milestones#list_all_mileston
-GET /milestones.json
+*/
 
-List Milestones on a Project
-http://developer.teamwork.com/milestones#list_milestones_o
-GET /projects/{project_id}/milestones.json
+	/**
+	 * Get a Single Milestone
+	 * http://developer.teamwork.com/milestones#get_a_single_mile
+	 *
+	 * @param		int			milestone_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetMilestone = function( milestone_id, options ){
+		return Get(
+			BuildPath( 'milestones/{milestone_id}', {milestone_id:milestone_id} ),
+			options
+		);
+	};
+	
+	/**
+	 * List All Milestones
+	 * http://developer.teamwork.com/milestones#list_all_mileston
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetMilestones = function( options ){
+		return Get(
+			'milestones',
+			options
+		);
+	};
 
-Get a Single Milestone
-http://developer.teamwork.com/milestones#get_a_single_mile
-GET /milestones/{milestone_id}.json
+	/**
+	 * List Milestones on a Project
+	 * http://developer.teamwork.com/milestones#list_milestones_o
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectMilestones = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/milestones', {project_id:project_id} ),
+			options
+		);
+	};
+
+/**
 
 Complete
 http://developer.teamwork.com/milestones#complete
