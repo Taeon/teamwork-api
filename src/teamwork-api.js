@@ -998,11 +998,9 @@ http://developer.teamwork.com/messagereplies#destroy_message_r
 DELETE /messageReplies/{id}.json
 **/
 
-/**
-Milestones
-==========
-
-*/
+/**************
+ * Milestones *
+ **************/
 
 	/**
 	 * Get a Single Milestone
@@ -1074,25 +1072,63 @@ http://developer.teamwork.com/milestones#delete
 DELETE /milestones/{id}.json
 **/
 
+/*************
+ * Notebooks *
+ *************/
+
+
+	/**
+	 * Get a Single Notebook
+	 * http://developer.teamwork.com/notebooks#get_a_single_note
+	 *
+	 * @param		int			notebook_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetMilestone = function( notebook_id, options ){
+		return Get(
+			BuildPath( 'notebooks/{notebook_id}', {notebook_id:notebook_id} ),
+			options
+		);
+	};
+	
+	/**
+	 * List All Notebooks
+	 * http://developer.teamwork.com/notebooks#list_all_notebook
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetNotebooks = function( options ){
+		return Get(
+			'notebooks',
+			options
+		);
+	};
+
+	/**
+	 * List Notebooks on a Project
+	 * http://developer.teamwork.com/notebooks#list_notebooks_on
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectNotebooks = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/notebooks', {project_id:project_id} ),
+			options
+		);
+	};
+
 /**
-Notebooks
-=========
-
-List All Notebooks
-http://developer.teamwork.com/notebooks#list_all_notebook
-GET /notebooks.json
-
-List Notebooks on a Project
-http://developer.teamwork.com/notebooks#list_notebooks_on
-GET /projects/{project_id}/notebooks.json
 
 List Notebooks in a specific category
 http://developer.teamwork.com/notebooks#list_notebooks_in
 GET /notebookCategories/{id}/notebooks.json
-
-Get a Single Notebook
-http://developer.teamwork.com/notebooks#get_a_single_note
-GET /notebooks/{notebook_id}.json
 
 Create a Single Notebook
 http://developer.teamwork.com/notebooks#create_a_single_n
@@ -1115,10 +1151,11 @@ http://developer.teamwork.com/notebooks#delete_a_single_n
 DELETE /notebooks/{id}.json
 **/
 
-/**
-People
-======
+/**********
+ * People *
+ **********/
 
+/*
 Add a new user
 http://developer.teamwork.com/people#add_a_new_user
 POST /people.json
@@ -1133,10 +1170,6 @@ DELETE /people/{id}.json
 
 */
 
-	/*******************************
-	 *            People            *
-	 *******************************/
-		
 	/**
 	 * Get Current User Details
 	 * http://developer.teamwork.com/people#get_current_user_
@@ -1232,10 +1265,11 @@ DELETE /people/{id}.json
 	};
 
 
-/**
-People - Status
-===============
+/*******************
+ * People - Status *
+ *******************/
 
+/*
 Create Status
 http://developer.teamwork.com/people-status#create_status
 POST /me/status.json
@@ -1252,21 +1286,60 @@ http://developer.teamwork.com/people-status#delete_status
 DELETE /me/status/{status_id}.json
 DELETE /people/status/{status_id}.json
 DELETE /people/{person_id}/status/{status_id}.json
+*/
 
-Retrieve a Persons Status
-http://developer.teamwork.com/people-status#retrieve_a_person
-GET /me/status.json
-GET /people/{user_id}/status.json
+	/**
+	 * Retrieve current user's status
+	 * http://developer.teamwork.com/people-status#retrieve_a_person
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCurrentUserStatus = function( options ){
+		return Get(
+			'me/status',
+			options
+		);
+	};
+	
+	/**
+	 * Retrieve a Persons Status
+	 * http://developer.teamwork.com/people-status#retrieve_a_person
+	 *
+	 * @param		int			person_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetPersonStatus = function( user_id, options ){
+		return Get(
+			BuildPath( 'people/{user_id}/status', {user_id:user_id} ),
+			options
+		);
+	};
 
-Retrieve Everybodys Status
-http://developer.teamwork.com/people-status#retrieve_everybod
-GET /people/status.json
-**/
+	/**
+	 * Retrieve Everybodys Status
+	 * http://developer.teamwork.com/people-status#retrieve_everybod
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetPeopleStatus = function( options ){
+		return Get(
+			'people/status',
+			options
+		);
+	};
 
-/**
-Permissions
-===========
 
+/***************
+ * Permissions *
+ ***************/
+
+ /*
 Add a new user to a project
 http://developer.teamwork.com/permissions#add_a_new_user_to
 POST /projects/{id}/people/{id}.json
@@ -1278,20 +1351,36 @@ PUT /projects/{id}/people.json
 Remove a user from a project
 http://developer.teamwork.com/permissions#remove_a_user_fro
 DELETE /projects/{id}/people/{id}.json
+*/
 
-Get a users permissions on a project
-http://developer.teamwork.com/permissions#get_a_users_permi
-GET /projects/{id}/people/{id}.json
+	/**
+	 * Get a users permissions on a project
+	 * http://developer.teamwork.com/permissions#get_a_users_permi
+	 *
+	 * @param		int			project_id
+	 * @param		int			person_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProjectUserPermissions = function( project_id, user_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}/people/{user_id}', {project_id:project_id,user_id:user_id} ),
+			options
+		);
+	};
 
+/*
 Update a users permissions on a project
 http://developer.teamwork.com/permissions#update_a_users_pe
 PUT /projects/{id}/people/{id}.json
 **/
 
-/**
-Projects
-========
+/************
+ * Projects *
+ ************/
 
+ /*
 Create Project
 http://developer.teamwork.com/projectsapi#create_project
 POST /projects.json
@@ -1304,21 +1393,74 @@ Delete Project
 http://developer.teamwork.com/projectsapi#delete_project
 DELETE /projects/{id}.json
 
-Retrieve All Projects
-http://developer.teamwork.com/projectsapi#retrieve_all_proj
-GET /projects.json
+*/
 
-Retrieve a Single Project
-http://developer.teamwork.com/projectsapi#retrieve_a_single
-GET /projects/{project_id}.json
+	/**
+	 * Retrieve All Projects
+	 * http://developer.teamwork.com/projectsapi#retrieve_all_proj
+	 *
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProject = function( options ){
+		return Get(
+			'projects',
+			options
+		);
+	};
 
-Retrieve projects assigned to a specific company
-http://developer.teamwork.com/projectsapi#retrieve_projects
-GET /companies/{id}/projects.json
+	/**
+	 * Retrieve a Single Project
+	 * http://developer.teamwork.com/projectsapi#retrieve_a_single
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetProject = function( project_id, options ){
+		return Get(
+			BuildPath( 'projects/{project_id}', {project_id:project_id} ),
+			options
+		);
+	};
 
-Retrieve your Starred Projects
-http://developer.teamwork.com/projectsapi#retrieve_your_sta
-GET /projects/starred.json
+	/**
+	 * Retrieve projects assigned to a specific company
+	 * http://developer.teamwork.com/projectsapi#retrieve_projects
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetCompanyProjects = function( company_id, options ){
+		return Get(
+			BuildPath( 'companies/{id}/projects', {id:company_id} ),
+			options
+		);
+	};
+
+
+	/**
+	 * Retrieve your Starred Projects
+	 * http://developer.teamwork.com/projectsapi#retrieve_your_sta
+	 *
+	 * @param		int			project_id
+	 * @param		object		options		Options to pass on request
+	 *
+	 * @return	object			promises	Object with promise methods
+	 */
+	TeamworkAPI.prototype.GetStarredProjects = function( options ){
+		return Get(
+			'projects/starred',
+			options
+		);
+	};
+
+
+/*
 
 Star a project
 http://developer.teamwork.com/projectsapi#star_a_project
@@ -1328,25 +1470,6 @@ Unstar a project
 http://developer.teamwork.com/projectsapi#unstar_a_project
 PUT /projects/{project_id}/unstar.json
 **/
-
-
-	/*******************************
-	 *            Projects            *
-	 *******************************/
-
-	/**
-	 * Get list of projects
-	 *
-	 * @param		object		options		Options to pass on request
-	 *
-	 * @return	object			promises	Object with promise methods
-	 */
-	TeamworkAPI.prototype.GetProjects = function( options ){
-		return Get(
-			'projects',
-			options
-		);
-	};
 
 
 /**
